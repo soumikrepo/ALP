@@ -1,0 +1,25 @@
+{
+  "name": "Analytical_List_Page",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^7",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1",
+    "@sap/eslint-plugin-cds": "^3",
+    "@sap/ux-specification": "^1.120.10",
+    "eslint": "^9"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch-alp-v4": "cds watch --open alp-v4/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "sapux": [
+    "app/alp-v4"
+  ]
+}

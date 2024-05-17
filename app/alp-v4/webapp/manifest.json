@@ -1,0 +1,188 @@
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "com.app.alpv4",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:alp",
+      "version": "1.13.4",
+      "toolsId": "8840fefa-117e-4c7d-ab49-42d020817ba8"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/MyService/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.124.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ushell": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.app.alpv4.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "booksList",
+          "target": "booksList"
+        },
+        {
+          "pattern": "books({key}):?query:",
+          "name": "booksObjectPage",
+          "target": "booksObjectPage"
+        }
+      ],
+      "targets": {
+        "booksList": {
+          "type": "Component",
+          "id": "booksList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "entitySet": "books",
+              "initialLoad": "Enabled",
+              "variantManagement": "Page",
+              "navigation": {
+                "books": {
+                  "detail": {
+                    "route": "booksObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "ResponsiveTable",
+                    "selectionMode": "None"
+                  }
+                },
+                "@com.sap.vocabularies.UI.v1.SelectionFields": {
+                  "layout": "CompactVisual",
+                  "initialLayout": "Visual",
+                  "filterFields": {
+                    "category1": {
+                      "visualFilter": {
+                        "valueList": "com.sap.vocabularies.Common.v1.ValueList#vlCategory1"
+                      }
+                    },
+                    "category2": {
+                      "visualFilter": {
+                        "valueList": "com.sap.vocabularies.Common.v1.ValueList#vlCategory2"
+                      }
+                    },
+                    "publishedAt": {
+                      "visualFilter": {
+                        "valueList": "com.sap.vocabularies.Common.v1.ValueList#vlPublishedAt"
+                      }
+                    }
+                  }
+                }
+              },
+              "views": {
+                "paths": [
+                  {
+                    "primary": [
+                      {
+                        "annotationPath": "com.sap.vocabularies.UI.v1.PresentationVariant"
+                      }
+                    ],
+                    "secondary": [
+                      {
+                        "annotationPath": "com.sap.vocabularies.UI.v1.LineItem"
+                      }
+                    ],
+                    "defaultPath": "both"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "booksObjectPage": {
+          "type": "Component",
+          "id": "booksObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "entitySet": "books"
+            }
+          }
+        }
+      }
+    },
+    "extends": {
+      "extensions": {
+        "sap.ui.controllerExtensions": {}
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "analytical"
+  }
+}
